@@ -13,11 +13,11 @@ removeSkull.read_process_images('brain_tumor_dataset')
 df_images = feature_extraction.createDataFrame()
 df_features = feature_extraction.extract_features(df_images)
 
-x = 2
+
 le = None
 clf = SVC(kernel='poly')
 #clf = DecisionTreeClassifier()
-#clf = KNeighborsClassifier(n_neighbors=11)
+#clf = KNeighborsClassifier(n_neighbors=17)
 #clf = GaussianNB()
 X = df_features.drop(df_features['label'], axis=1)
 Y = df_features['label']

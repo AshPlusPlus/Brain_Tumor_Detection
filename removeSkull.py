@@ -16,8 +16,25 @@ def read_process_images(folder):
                 for imagename in os.listdir(folder + path):
                         img = cv2.imread(os.path.join(folder + path, imagename))
                         x = img.copy()
-                        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                        #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+                        # Cropping
+                        hh, ww = img.shape[:2]
+                        end1 = ww - 10
+                        end2 = hh - 10
+                        cropped_image = img[10:end2, 10:end1]
+
+                        #Converting to gray
+                        img = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
+
+                        # Histogram Equalization
+                        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+                        img = clahe.apply(img)
+
+                        # gammaImg = gammaCorrection(img, 0.5)
+
+                        # Median Filture to remove the salt-pepper noise
+                        img = cv2.medianBlur(img, 5)
                         # Thresholding the same image
                         _, thresholdedImage = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
 

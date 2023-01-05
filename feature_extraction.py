@@ -11,11 +11,8 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from tensorflow import keras
 from keras import applications
-
 from keras import preprocessing
-from tensorflow.keras.applications.vgg16 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
-
 from imutils import paths
 import numpy as np
 import pandas as pd
@@ -79,7 +76,6 @@ def extract_features(df_images):
     for image in images:
         image = tf.expand_dims(image, axis=0)
         image = applications.vgg19.preprocess_input(image)
-        #image = preprocess_input(image)
         features = model.predict(image)
         features = features.reshape((features.shape[0], -1))
         if done == 0:
@@ -95,13 +91,6 @@ def extract_features(df_images):
 
 
 
-
-#training_data = df.sample(frac=0.8, random_state=25)
-#testing_data = df.drop(training_data.index)
-
-#prediction_model.fit(training_data.drop(training_data['label'], axis=1).to_numpy(), training_data['label'].to_numpy())
-#results = prediction_model.predict(testing_data.drop(testing_data['label'], axis=1).to_numpy())
-#print (metrics.accuracy_score(results, testing_data['label'].to_numpy()))
 
 
 
