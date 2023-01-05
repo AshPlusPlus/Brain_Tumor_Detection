@@ -34,12 +34,14 @@ def experiment(X, y, clf, verbose=0):
         pred_y = clf.predict(test_X)
 
         cf_matrix = metrics.confusion_matrix(test_y, pred_y, labels=[0, 1])
+        '''''
         print('test_y')
         print(test_y)
         print('pred_y')
         print(pred_y)
         print("Confusion matrix")
         print(cf_matrix)
+        '''
         TP = cf_matrix[1][1]
         TN = cf_matrix[0][0]
         FP = cf_matrix[0][1]
@@ -53,7 +55,7 @@ def experiment(X, y, clf, verbose=0):
         # Sensitivity = Recall = (True Positive)/(True Positive + False Negative)
         sensitivity = TP / (TP + FN)
         sensitivity_total += [sensitivity]
-        print("sensitivity", sensitivity, TP, FN)
+#        print("sensitivity = ", sensitivity, TP, FN)
 
         # precision = tp / p = tp / (tp + fp)
         precision = TP / (TP + FP)
@@ -72,7 +74,7 @@ def experiment(X, y, clf, verbose=0):
 
         if verbose:
             print('>Train: 0=%d, 1=%d \t Test: 0=%d, 1=%d' % (train_0, train_1, test_0, test_1))
-
+            print(">Accuracy =", accuracy, "f1 =", f1)
         '''
     print(classification_report(test_y, pred_y, labels=[0,1]))
     print('Sensitivity: {0:0.2f}'.format(sensitivity))
